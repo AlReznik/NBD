@@ -1,0 +1,62 @@
+1. Wszystkie filmy
+
+    MATCH (movie:Movie) RETURN movie
+
+2. Wszystkie filmy, w których grał Hugo Weaving
+
+    MATCH (movie:Movie)<-[:ACTED_IN]-(actor:Person {name:'Hugo Weaving'})
+    RETURN movie, actor
+
+3. Reżyserzy filmów, w których grał Hugo Weaving
+
+    MATCH (director:Person)-[:DIRECTED]->(movie:Movie)<-[:ACTED_IN]-(actor:Person {name:'Hugo Weaving'})
+    RETURN movie, actor, director
+
+4. Wszystkie osoby, z którymi Hugo Weaving grał w tych samych filmach
+
+    MATCH (coactor:Person)-[:ACTED_IN]->(movie:Movie)<-[:ACTED_IN]-(actor:Person {name:'Hugo Weaving'})
+    RETURN actor, movie, coactor
+
+5. Wszystkie filmy osób, które grały w Matrix
+
+    MATCH (movie:Movie {title:'The Matrix'})<-[:ACTED_IN]-(actor:Person)-[:ACTED_IN]->(other_movie:Movie)
+    RETURN movie, actor, other_movie
+
+6. Listę aktorów (aktor = osoba, która grała przynajmniej w jednym filmie) wraz z ilością filmów, w których grali
+
+    MATCH (actor:Person)-[:ACTED_IN]->(movie:Movie)
+    RETURN actor.name AS actor, count(movie) as movies
+
+7. Listę osób, które napisały scenariusz filmu, które wyreżyserowały wraz z tytułami 
+takich filmów (koniunkcja – ten sam autor scenariusza i reżyser)
+
+    MATCH (person:Person)-[:DIRECTED]->(movie:Movie)<-[:WROTE]-(person:Person)
+    RETURN person, movie
+
+8. Listę filmów, w których grał zarówno Hugo Weaving jak i Keanu Reeves
+
+    MATCH (actor:Person {name:'Hugo Weaving'})-[:ACTED_IN]->
+            (movie:Movie)<-[:ACTED_IN]-(coactor:Person {name:'Keanu Reeves'})
+    RETURN actor.name, coactor.name, movie.title
+
+9. (za 0.2pkt) Zestaw zapytań powodujących uzupełnienie bazy danych o film Captain 
+America: The First Avenger wraz z uzupełnieniem informacji o reżyserze, 
+scenarzystach i odtwórcach głównych ról (w oparciu o skrócone informacje z IMDB -
+http://www.imdb.com/title/tt0458339/) + zapytanie pokazujące dodany do bazy 
+film wraz odtwórcami głównych ról, scenarzystą i reżyserem. Plik SVG ma 
+pokazywać wynik ostatniego zapytania.
+
+    MERGE (movie:Movie {title:'Captain America: The First Avenger'})
+    MERGE (director:Person {name:'Joe Johnston'})-[:DIRECTED]->(movie)
+    FOREACH (writer_name IN ['Christopher Markus','Stephen McFeely', 'Joe Simon'] |
+        MERGE (writer:Person {name:writer_name})
+        MERGE (writer)-[:WROTE]->(movie) )
+    FOREACH (actor_name IN ['Chris Evans', 'Hugo Weaving', 'Samuel L. Jackson', 'Hayley Atwell', 'Sebastian Stan',
+                        'Tommy Lee Jones', 'Dominic Cooper', 'Richard Armitage', 'Stanley Tucci', 'Toby Jones',
+                        'Neal McDonough', 'Derek Luke', 'Kenneth Choi', 'JJ Feild', 'Bruno Ricci', 'Lex Shrapnel',
+                        'Michael Brandon', 'Martin Sherman'] |
+        MERGE (actor:Person {name:actor_name})
+        MERGE (actor)-[:ACTED_IN]->(movie) )
+    WITH movie
+    MATCH (movie:Movie)-[]-(person:Person)
+    RETURN person, movie
