@@ -1,0 +1,139 @@
+Część 1 – Wycieczki górskie
+Zaimportuj dane uruchamiając skrypt task2.cypher. Napisz następujące zapytania: 
+1. Znajdź trasy którymi można dostać się z Darjeeling na Sandakphu, mające 
+najmniejszą ilość etapów
+
+    MATCH paths = allShortestPaths((n1 {name: "Darjeeling"})-[*]->(n2 {name: "Sandakphu"}))
+    RETURN paths
+
+2. Znajdź mające najmniej etapów trasy którymi można dostać się z Darjeeling na 
+Sandakphu i które mogą być wykorzystywane zimą 
+
+    MATCH paths = allShortestPaths((n1 {name: "Darjeeling"})-[*]->(n2 {name: "Sandakphu"}))
+    WHERE all(r IN relationships(paths) WHERE r.winter = "true")
+    RETURN paths
+
+3. Uszereguj trasy którymi można dostać się z Darjeeling na Sandakphu według 
+dystansu
+
+    MATCH p = (n1 {name: "Darjeeling"})-[*]->(n2 {name: "Sandakphu"})
+    RETURN DISTINCT reduce(pth = "", n IN nodes(p) | pth + " -> " + n.name) AS path,
+            reduce(s = 0, r IN relationships(p) | s + r.distance) AS dist
+    ORDER BY dist ASC
+
+4. Znajdź wszystkie miejsca do których można dotrzeć przy pomocy roweru 
+(twowheeler) z Rimbika latem
+
+    MATCH p = (n1 {name: "Rimbik"})-[:twowheeler* {summer:"true"}]->(n2)
+    RETURN n1, n2
+
+Część 2 – Połączenia lotnicze
+Zaimportuj dane uruchamiając skrypt task3.cypher. Napisz następujące zapytania:
+5. Uszereguj porty lotnicze według ilości rozpoczynających się w nich lotów
+
+    MATCH (a:Airport)<-[:ORIGIN]-(f:Flight)
+    RETURN a.name AS airport, count(f) AS flights
+    ORDER BY flights DESC
+
+6. Znajdź wszystkie porty lotnicze, do których da się dolecieć (bezpośrednio lub z 
+przesiadkami) z Los Angeles (LAX) wydając mniej niż 3000
+
+    MATCH path = (origin:Airport {name:"LAX"})<-[*..8]->(dest:Airport)
+    WITH path, dest,
+        [n IN nodes(path) WHERE 'Flight' IN labels(n)] AS flights,
+        [x IN range(1, size(relationships(path))) WHERE x % 2 = 0] AS even,
+        [x IN range(1, size(relationships(path))) WHERE x % 2 <> 0] AS odd
+    WHERE all(r IN [i IN odd | relationships(path)[i-1]] WHERE type(r) = "ORIGIN" ) AND
+        all(r IN [i IN even | relationships(path)[i-1]] WHERE type(r) = "DESTINATION" )
+    CALL {
+        WITH flights
+        UNWIND flights AS flight
+        CALL {
+            WITH flight
+            MATCH (flight)<-[:ASSIGN]-(t:Ticket)
+            RETURN min(t.price) AS min_price
+        }
+        RETURN sum(min_price) as price
+    }
+    WITH dest.name AS dest, min(price) as min_price
+    WHERE min_price < 3000
+    RETURN DISTINCT dest, min_price
+    ORDER BY min_price
+
+7. Uszereguj połączenia, którymi można dotrzeć z Los Angeles (LAX) do Dayton 
+(DAY) według ceny biletów
+
+    MATCH path = (origin:Airport {name:"LAX"})<-[*..8]->(dest:Airport {name:"MSN"})
+    WITH path, dest,
+        [n IN nodes(path) WHERE 'Flight' IN labels(n)] AS flights,
+        [n IN nodes(path) WHERE 'Airport' IN labels(n)] AS airports,
+        [x IN range(1, size(relationships(path))) WHERE x % 2 = 0] AS even,
+        [x IN range(1, size(relationships(path))) WHERE x % 2 <> 0] AS odd
+    WHERE all(r IN [i IN odd | relationships(path)[i-1]] WHERE type(r) = "ORIGIN" ) AND
+        all(r IN [i IN even | relationships(path)[i-1]] WHERE type(r) = "DESTINATION" )
+    CALL {
+        WITH flights
+        UNWIND flights AS flight
+        CALL {
+            WITH flight
+            MATCH (flight)<-[:ASSIGN]-(t:Ticket)
+            RETURN min(t.price) AS min_price
+        }
+        RETURN sum(min_price) as price
+    }
+    RETURN DISTINCT reduce(pth = "", n IN airports | pth + " -> " + n.name) AS route, min(price) AS min_price
+    ORDER BY min_price
+
+8. Znajdź najtańsze połączenie z Los Angeles (LAX) do Dayton (DAY)
+
+    MATCH path = (origin:Airport {name:"LAX"})<-[*..8]->(dest:Airport {name:"MSN"})
+    WITH path, dest,
+        [n IN nodes(path) WHERE 'Flight' IN labels(n)] AS flights,
+        [n IN nodes(path) WHERE 'Airport' IN labels(n)] AS airports,
+        [x IN range(1, size(relationships(path))) WHERE x % 2 = 0] AS even,
+        [x IN range(1, size(relationships(path))) WHERE x % 2 <> 0] AS odd
+    WHERE all(r IN [i IN odd | relationships(path)[i-1]] WHERE type(r) = "ORIGIN" ) AND
+        all(r IN [i IN even | relationships(path)[i-1]] WHERE type(r) = "DESTINATION" )
+    CALL {
+        WITH flights
+        UNWIND flights AS flight
+        CALL {
+            WITH flight
+            MATCH (flight)<-[:ASSIGN]-(t:Ticket)
+            RETURN min(t.price) AS min_price
+        }
+        RETURN sum(min_price) as price
+    }
+    RETURN DISTINCT reduce(pth = "", n IN airports | pth + " -> " + n.name) AS route, min(price) AS min_price
+    ORDER BY min_price
+    LIMIT 1
+
+9. Uszereguj linie lotnicze według ilości miast, pomiędzy którymi oferują połączenia 
+(unikalnych miast biorących udział w relacjach :ORIGIN i :DESTINATION węzłów 
+typu Flight obsługiwanych przez daną linię)
+
+    MATCH path = (origin:Airport)<-[:ORIGIN]-(flight:Flight)-[:DESTINATION]->(dest:Airport)
+    WITH flight.airline as airline, origin.name + "->" + dest.name as route
+    RETURN airline, count(route) AS routes
+    ORDER BY routes
+
+10. Znajdź najtańszą trasę łączącą 3 różne porty lotnicze
+
+    MATCH path = (origin:Airport)<-[*4]->(dest:Airport)
+    WHERE origin <> dest
+    WITH dest,
+        [n IN nodes(path) WHERE 'Flight' IN labels(n)] AS flights,
+        [n IN nodes(path) WHERE 'Airport' IN labels(n) | n.name] AS airports
+    CALL {
+        WITH flights
+        UNWIND flights AS flight
+        CALL {
+            WITH flight
+            MATCH (flight)<-[:ASSIGN]-(t:Ticket)
+            RETURN min(t.price) AS min_price
+        }
+        RETURN sum(min_price) as price
+    }
+    RETURN DISTINCT apoc.coll.sort(airports) AS airports, price
+    ORDER BY price
+    LIMIT 1

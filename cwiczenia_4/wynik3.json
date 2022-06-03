@@ -1,0 +1,26 @@
+﻿[
+    {
+        "path": " -> Darjeeling -> Tumbling -> Gairibus -> BhikeBhanja -> Sandakphu",
+        "dist": 32
+    },
+    {
+        "path": " -> Darjeeling -> Rimbik -> Sirikhola -> Gurdum -> Sandakphu",
+        "dist": 37
+    },
+    {
+        "path": " -> Darjeeling -> Rimbik -> BhikeBhanja -> Sandakphu",
+        "dist": 37
+    },
+    {
+        "path": " -> Darjeeling -> Rimbik -> Tumbling -> Gairibus -> BhikeBhanja -> Sandakphu",
+        "dist": 44
+    },
+    {
+        "path": " -> Darjeeling -> Rimbik -> Sirikhola -> Rammam -> Gurdum -> Sandakphu",
+        "dist": 48
+    },
+    {
+        "path": " -> Darjeeling -> Rimbik -> Sirikhola -> Rammam -> Sabargram -> Sandakphu",
+        "dist": 55
+    }
+]

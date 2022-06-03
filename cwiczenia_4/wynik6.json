@@ -1,0 +1,190 @@
+﻿[
+    {
+        "dest": "FAT",
+        "min_price": 165.75
+    },
+    {
+        "dest": "LAS",
+        "min_price": 186.75
+    },
+    {
+        "dest": "SMF",
+        "min_price": 294.75
+    },
+    {
+        "dest": "LAX",
+        "min_price": 332.25
+    },
+    {
+        "dest": "TUS",
+        "min_price": 354.0
+    },
+    {
+        "dest": "ABQ",
+        "min_price": 528.0
+    },
+    {
+        "dest": "DEN",
+        "min_price": 677.25
+    },
+    {
+        "dest": "OKC",
+        "min_price": 1065.75
+    },
+    {
+        "dest": "IAH",
+        "min_price": 1070.25
+    },
+    {
+        "dest": "BZN",
+        "min_price": 1088.25
+    },
+    {
+        "dest": "PHX",
+        "min_price": 1153.5
+    },
+    {
+        "dest": "AUS",
+        "min_price": 1182.0
+    },
+    {
+        "dest": "CRP",
+        "min_price": 1230.0
+    },
+    {
+        "dest": "DFW",
+        "min_price": 1248.0
+    },
+    {
+        "dest": "MFE",
+        "min_price": 1320.0
+    },
+    {
+        "dest": "MEM",
+        "min_price": 1358.25
+    },
+    {
+        "dest": "ORD",
+        "min_price": 1368.0
+    },
+    {
+        "dest": "TUL",
+        "min_price": 1407.0
+    },
+    {
+        "dest": "SJC",
+        "min_price": 1420.5
+    },
+    {
+        "dest": "SFO",
+        "min_price": 1434.75
+    },
+    {
+        "dest": "MSN",
+        "min_price": 1454.25
+    },
+    {
+        "dest": "GRR",
+        "min_price": 1476.0
+    },
+    {
+        "dest": "SEA",
+        "min_price": 1478.25
+    },
+    {
+        "dest": "CMH",
+        "min_price": 1575.0
+    },
+    {
+        "dest": "RNO",
+        "min_price": 1587.0
+    },
+    {
+        "dest": "PIT",
+        "min_price": 1691.25
+    },
+    {
+        "dest": "OMA",
+        "min_price": 1694.25
+    },
+    {
+        "dest": "SGF",
+        "min_price": 1714.5
+    },
+    {
+        "dest": "MCO",
+        "min_price": 1737.0
+    },
+    {
+        "dest": "PSP",
+        "min_price": 1765.5
+    },
+    {
+        "dest": "ROC",
+        "min_price": 1780.5
+    },
+    {
+        "dest": "IAD",
+        "min_price": 1791.0
+    },
+    {
+        "dest": "FAR",
+        "min_price": 1806.75
+    },
+    {
+        "dest": "FLL",
+        "min_price": 1823.25
+    },
+    {
+        "dest": "BWI",
+        "min_price": 1854.0
+    },
+    {
+        "dest": "PDX",
+        "min_price": 1866.0
+    },
+    {
+        "dest": "EWR",
+        "min_price": 1905.0
+    },
+    {
+        "dest": "ORF",
+        "min_price": 1931.25
+    },
+    {
+        "dest": "LGA",
+        "min_price": 1938.75
+    },
+    {
+        "dest": "BDL",
+        "min_price": 1977.75
+    },
+    {
+        "dest": "MSY",
+        "min_price": 2023.5
+    },
+    {
+        "dest": "BOS",
+        "min_price": 2025.0
+    },
+    {
+        "dest": "TPA",
+        "min_price": 2159.25
+    },
+    {
+        "dest": "RSW",
+        "min_price": 2243.25
+    },
+    {
+        "dest": "MIA",
+        "min_price": 2301.75
+    },
+    {
+        "dest": "SNA",
+        "min_price": 2723.25
+    },
+    {
+        "dest": "PBI",
+        "min_price": 2776.5
+    }
+]

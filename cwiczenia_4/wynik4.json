@@ -1,0 +1,83 @@
+﻿[
+    {
+        "n1": {
+            "identity": 219,
+            "labels": [
+                "town"
+            ],
+            "properties": {
+                "name": "Rimbik"
+            }
+        },
+        "n2": {
+            "identity": 209,
+            "labels": [
+                "peak"
+            ],
+            "properties": {
+                "altitude": "12400 ft",
+                "name": "Sandakphu"
+            }
+        }
+    },
+    {
+        "n1": {
+            "identity": 219,
+            "labels": [
+                "town"
+            ],
+            "properties": {
+                "name": "Rimbik"
+            }
+        },
+        "n2": {
+            "identity": 216,
+            "labels": [
+                "village"
+            ],
+            "properties": {
+                "name": "Sirikhola"
+            }
+        }
+    },
+    {
+        "n1": {
+            "identity": 219,
+            "labels": [
+                "town"
+            ],
+            "properties": {
+                "name": "Rimbik"
+            }
+        },
+        "n2": {
+            "identity": 222,
+            "labels": [
+                "village"
+            ],
+            "properties": {
+                "name": "Gurdum"
+            }
+        }
+    },
+    {
+        "n1": {
+            "identity": 219,
+            "labels": [
+                "town"
+            ],
+            "properties": {
+                "name": "Rimbik"
+            }
+        },
+        "n2": {
+            "identity": 241,
+            "labels": [
+                "village"
+            ],
+            "properties": {
+                "name": "Rammam"
+            }
+        }
+    }
+]

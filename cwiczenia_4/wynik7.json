@@ -1,0 +1,58 @@
+﻿[
+  {
+    "route": " -> LAX -> LAS -> DEN -> ORD -> MSN",
+    "min_price": 1454.25
+  },
+  {
+    "route": " -> LAX -> SMF -> DEN -> ORD -> MSN",
+    "min_price": 1781.25
+  },
+  {
+    "route": " -> LAX -> IAH -> ORD -> MSN",
+    "min_price": 1878.0
+  },
+  {
+    "route": " -> LAX -> LAS -> IAD -> ORD -> MSN",
+    "min_price": 2342.25
+  },
+  {
+    "route": " -> LAX -> EWR -> ORD -> MSN",
+    "min_price": 2559.0
+  },
+  {
+    "route": " -> LAX -> IAH -> MCO -> ORD -> MSN",
+    "min_price": 2613.0
+  },
+  {
+    "route": " -> LAX -> IAH -> EWR -> ORD -> MSN",
+    "min_price": 2813.25
+  },
+  {
+    "route": " -> LAX -> IAH -> LGA -> ORD -> MSN",
+    "min_price": 2840.25
+  },
+  {
+    "route": " -> LAX -> BOS -> IAD -> ORD -> MSN",
+    "min_price": 2904.0
+  },
+  {
+    "route": " -> LAX -> EWR -> IAH -> ORD -> MSN",
+    "min_price": 3813.75
+  },
+  {
+    "route": " -> LAX -> IAH -> SFO -> ORD -> MSN",
+    "min_price": 3877.5
+  },
+  {
+    "route": " -> LAX -> BOS -> IAH -> ORD -> MSN",
+    "min_price": 4089.0
+  },
+  {
+    "route": " -> LAX -> EWR -> SFO -> ORD -> MSN",
+    "min_price": 5435.25
+  },
+  {
+    "route": " -> LAX -> BOS -> SFO -> ORD -> MSN",
+    "min_price": 5667.75
+  }
+]
