@@ -1,0 +1,103 @@
+1. Umieść w bazie (nazwa bucketa ma być Twoim numerem indeksu poprzedzonym literą „s”) 5 wartości, gdzie każda z nich ma być dokumentem json mającym 4 pola co najmniej dwóch różnych typów.
+
+HTTP/1.1 204 No Content
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Date: Sun, 26 Jun 2022 11:53:12 GMT
+Content-Type: application/json
+Content-Length: 0
+
+2. Pobierz z bazy jedną z dodanych przez Ciebie wartości.
+
+HTTP/1.1 200 OK
+X-Riak-Vclock: a85hYGBgzGDKBVIcBXm1//b6N63MYEpkzWNlWHFE5w5fFgA=
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Link: </riak/s25881>; rel="up"
+Last-Modified: Sun, 26 Jun 2022 11:53:12 GMT
+ETag: "2nhhfIWUV8lk8oX1vYrXBk"
+Date: Sun, 26 Jun 2022 11:53:53 GMT
+Content-Type: application/json
+Content-Length: 115
+
+{"name" : "Summer Pane",  "mail" : "summer.payne@example.com", "phone" : "515.123.8181", "manager_id": 106}
+
+3. Zmodyfikuj jedną z wartości – dodając dodatkowe pole do dokumentu.
+
+HTTP/1.1 204 No Content
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Date: Sun, 26 Jun 2022 11:54:31 GMT
+Content-Type: application/json
+Content-Length: 0
+
+4. Zmodyfikuj jedną z wartości – usuwając jedną pole z wybranego dokumentu.
+
+HTTP/1.1 204 No Content
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Date: Sun, 26 Jun 2022 11:55:11 GMT
+Content-Type: application/json
+Content-Length: 0
+
+5. Zmodyfikuj jedną z wartości – zmieniając wartość jednego z pól.
+
+HTTP/1.1 204 No Content
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Date: Sun, 26 Jun 2022 11:55:50 GMT
+Content-Type: application/json
+Content-Length: 0
+
+6. Usuń jeden z dokumentów z bazy.
+
+HTTP/1.1 204 No Content
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Date: Sun, 26 Jun 2022 11:56:10 GMT
+Content-Type: application/json
+Content-Length: 0
+
+7. Spróbuj pobrać z bazy wartość, która nie istnieje w tej bazie.
+
+HTTP/1.1 404 Object Not Found
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Date: Sun, 26 Jun 2022 11:56:35 GMT
+Content-Type: text/plain
+Content-Length: 10
+
+not found
+
+8. Dodaj do bazy 1 dokument json (zawierający 1 pole), ale nie specyfikuj klucza.
+
+HTTP/1.1 201 Created
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Location: /riak/s25881/VcWEUXrBe4Aolj9vjc6qNoZOyuc
+Date: Sun, 26 Jun 2022 11:58:03 GMT
+Content-Type: application/json
+Content-Length: 0
+
+9. Pobierz z bazy element z zadania 8.
+
+HTTP/1.1 200 OK
+X-Riak-Vclock: a85hYGBgzGDKBVIcBXm1//Y6f1mRwZTImMfKcOqozh2+LAA=
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Link: </riak/s25881>; rel="up"
+Last-Modified: Sun, 26 Jun 2022 11:58:02 GMT
+ETag: "5cqigg6fT4FRGoUfYY07Yk"
+Date: Sun, 26 Jun 2022 11:59:39 GMT
+Content-Type: application/json
+Content-Length: 24
+
+{"name" : "Jude Rivera"}
+
+10. Usuń z bazy element z zadania 8.
+
+HTTP/1.1 204 No Content
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.6 (no drinks)
+Date: Sun, 26 Jun 2022 12:03:42 GMT
+Content-Type: application/json
+Content-Length: 0

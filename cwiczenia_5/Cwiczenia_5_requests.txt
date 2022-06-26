@@ -1,0 +1,65 @@
+1. Umieść w bazie (nazwa bucketa ma być Twoim numerem indeksu poprzedzonym literą „s”) 5 wartości, gdzie każda z nich ma być dokumentem json mającym 4 pola co najmniej dwóch różnych typów.
+
+curl -i -X PUT http://3.88.140.204:8098/riak/s25881/0001 \
+ -H "Content-Type: application/json" \
+ -d '{"name" : "Summer Pane", "mail" : "summer.payne@example.com", "phone" : "515.123.8181", "manager_id" : 106}'
+
+curl -i -X PUT http://3.88.140.204:8098/riak/s25881/0002 \
+ -H "Content-Type: application/json" \
+ -d '{"name" : "Rose Stephens", "mail" : "rose.stephens@example.com", "phone" : "515.123.8080", "manager_id" : 2}'
+
+curl -i -X PUT http://3.88.140.204:8098/riak/s25881/0003 \
+ -H "Content-Type: application/json" \
+ -d '{"name" : "Annabelle Dunn", "mail" : "annabelle.dunn@example.com", "phone" : "515.123.4444", "manager_id" : 2}'
+
+curl -i -X PUT http://3.88.140.204:8098/riak/s25881/0004 \
+ -H "Content-Type: application/json" \
+ -d '{"name" : "Tommy Bailey", "mail" : "tommy.bailey@example.com", "phone" : "515.123.4567", "manager_id" : 25}'
+
+curl -i -X PUT http://3.88.140.204:8098/riak/s25881/0005 \
+ -H "Content-Type: application/json" \
+ -d '{"name" : "Blake Cooper", "mail" : "blake.cooper@example.com", "phone" : "515.123.4569", "manager_id" : 34}'
+
+2. Pobierz z bazy jedną z dodanych przez Ciebie wartości. 
+
+curl -i GET http://3.88.140.204:8098/riak/s25881/0001
+
+3. Zmodyfikuj jedną z wartości – dodając dodatkowe pole do dokumentu.
+
+curl -i -X PUT http://3.88.140.204:8098/riak/s25881/0001 \
+ -H "Content-Type: application/json" \
+ -d '{"name" : "Summer Pane", "mail" : "summer.payne@example.com", "phone" : "515.123.8181", "manager_id" : 106, "job_title": "Public Accountant"}'
+
+4. Zmodyfikuj jedną z wartości – usuwając jedną pole z wybranego dokumentu.
+
+curl -i -X PUT http://3.88.140.204:8098/riak/s25881/0001 \
+ -H "Content-Type: application/json" \
+ -d '{"name" : "Summer Pane", "mail" : "summer.payne@example.com", "manager_id" : 106, "job_title": "Public Accountant"}'
+ 
+5. Zmodyfikuj jedną z wartości – zmieniając wartość jednego z pól.
+
+curl -i -X PUT http://3.88.140.204:8098/riak/s25881/0001 \
+ -H "Content-Type: application/json" \
+ -d '{"name" : "Summer Pane", "mail" : "summer.payne@example.com", "manager_id" : 106, "job_title": "Finance Manager"}'
+ 
+6. Usuń jeden z dokumentów z bazy.
+
+curl -i -X DELETE http://3.88.140.204:8098/riak/s25881/0001
+
+7. Spróbuj pobrać z bazy wartość, która nie istnieje w tej bazie.
+
+curl -i GET http://3.88.140.204:8098/riak/s25881/0006
+
+8. Dodaj do bazy 1 dokument json (zawierający 1 pole), ale nie specyfikuj klucza.
+
+curl -i -X POST http://3.88.140.204:8098/riak/s25881 \
+ -H "Content-Type: application/json" \
+ -d '{"name" : "Jude Rivera"}'
+ 
+9. Pobierz z bazy element z zadania 8.
+
+curl -i GET http://3.88.140.204:8098/riak/s25881/VcWEUXrBe4Aolj9vjc6qNoZOyuc
+
+10. Usuń z bazy element z zadania 8.
+
+curl -i -X DELETE http://3.88.140.204:8098/riak/s25881/VcWEUXrBe4Aolj9vjc6qNoZOyuc
